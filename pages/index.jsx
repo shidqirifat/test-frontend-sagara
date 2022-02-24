@@ -1,12 +1,12 @@
-import CardLogIn from "../src/components/organisms/CardLogin";
+import CardSignUp from "../src/components/organisms/CardSignUp";
 import Gap from "../src/components/atoms/Gap";
 
 export default function Home() {
   return (
     <>
       <Gap height={160} />
-      <CardLogIn />
-      <Gap height={300} />
+      <CardSignUp />
+      <Gap height={80} />
     </>
   );
 }

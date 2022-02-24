@@ -6,8 +6,9 @@ import InputGender from "../moleculs/InputGender";
 import InputProvince from "../moleculs/InputProvince";
 import InputCity from "../moleculs/InputCity";
 import Button from "../atoms/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import { saveLocalStorage } from "../../utils/storage-helper";
 
 export default function CardSignUp() {
   const router = useRouter();
@@ -21,10 +22,6 @@ export default function CardSignUp() {
     city: "",
   });
 
-  useEffect(() => {
-    console.log(dataForm);
-  }, [dataForm]);
-
   function handleChange(e) {
     const { value, name } = e.target;
 
@@ -34,15 +31,22 @@ export default function CardSignUp() {
     }));
   }
 
+  function isFormNotFull(form) {
+    return Object.values(form).every((data) => data === "");
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    const isThereEmpty = Object.values(dataForm).every((data) => data === "");
-    if (isThereEmpty) alert("Please insert all the data before submit!");
+    if (isFormNotFull(dataForm))
+      alert("Please insert all the data before submit!");
     else {
+      const success = saveLocalStorage(dataForm);
+      if (!success)
+        return alert("failed register an account, email has already added");
+
       router.push({
         pathname: "/login",
-        query: { firstName: dataForm.firstName, lastName: dataForm.lastName },
       });
     }
   }
