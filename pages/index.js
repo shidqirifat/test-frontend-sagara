@@ -4,10 +4,6 @@ import Gap from "../components/atoms/Gap";
 import CardSignUp from "../components/organisms/CardSignUp";
 
 export default function Home() {
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("object");
-  }
   return (
     <>
       <Head>
@@ -19,10 +15,7 @@ export default function Home() {
       <main className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
         <Header />
         <Gap height={160} />
-
-        <form onSubmit={handleSubmit}>
-          <CardSignUp />
-        </form>
+        <CardSignUp />
         <Gap height={160} />
       </main>
     </>
