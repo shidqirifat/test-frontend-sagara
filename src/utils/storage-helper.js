@@ -1,4 +1,4 @@
-import { DATA } from "./DATA";
+import CONFIG from "./CONFIG";
 
 function saveLocalStorage(newUser) {
   let addUsers = [];
@@ -6,12 +6,12 @@ function saveLocalStorage(newUser) {
   if (isEmailExist(newUser)) return false;
   addUsers.push(newUser);
 
-  localStorage.setItem(DATA.KEY_APP, JSON.stringify(addUsers));
+  localStorage.setItem(CONFIG.KEY_APP, JSON.stringify(addUsers));
   return true;
 }
 
 function getLocalStorage() {
-  return JSON.parse(localStorage.getItem(DATA.KEY_APP));
+  return JSON.parse(localStorage.getItem(CONFIG.KEY_APP));
 }
 
 function isEmailExist(newEmail) {

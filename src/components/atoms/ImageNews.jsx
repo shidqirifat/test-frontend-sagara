@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 export default function ImageNews({ src, alt }) {
   return (
     <div className="h-52 w-full overflow-hidden absolute">

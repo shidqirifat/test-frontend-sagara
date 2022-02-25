@@ -1,5 +1,5 @@
 import { isEmailExist, getLocalStorage } from "./storage-helper";
-import { DATA } from "./DATA";
+import CONFIG from "./CONFIG";
 
 function authLogin(account) {
   if (!isEmailExist(account)) return false;
@@ -18,13 +18,13 @@ function isMatch(account) {
 }
 
 function saveAuth(user) {
-  localStorage.setItem(DATA.KEY_USER, JSON.stringify(user))
+  localStorage.setItem(CONFIG.KEY_USER, JSON.stringify(user))
 }
 
 function getUserLogin() {
   const ISSERVER = typeof window === "undefined";
 
-  if (!ISSERVER) return JSON.parse(localStorage.getItem(DATA.KEY_USER));
+  if (!ISSERVER) return JSON.parse(localStorage.getItem(CONFIG.KEY_USER));
 }
 
 export { authLogin, getUserLogin };

@@ -1,4 +1,4 @@
-import TextHero from "../atoms/TextHero";
+import { TextHero } from "../atoms/Text";
 
 export default function Hero({ user }) {
   return (

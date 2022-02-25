@@ -1,4 +1,4 @@
-import { TextAuthor, TextDescription } from "../atoms/TextNews";
+import { TextAuthor, TextDescription } from "../atoms/Text";
 import TitleNews from "../atoms/TitleNews";
 
 export default function ContentNews({ children }) {
