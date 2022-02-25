@@ -8,7 +8,7 @@ export default function InputOption({
 }) {
   const OptionElement = values.map((item, index) => (
     <option key={index} value={item} className="text-sm">
-      {value}
+      {item}
     </option>
   ));
 

@@ -1,8 +1,18 @@
 import Head from "next/head";
 import Header from "../components/moleculs/Header";
-import { TextFooter } from "../components/atoms/Text";
+import Footer from "../components/moleculs/Footer";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export default function Layout({ children }) {
+  const [heightScreen, setHeightScreen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.pathname === "/login") setHeightScreen(true);
+    else setHeightScreen(false);
+  });
+
   return (
     <>
       <Head>
@@ -11,15 +21,14 @@ export default function Layout({ children }) {
         <link rel="icon" href="/logo-short.png" />
       </Head>
 
-      <div className="bg-gradient-to-b from-slate-900 to-slate-800">
+      <div
+        className={`bg-gradient-to-b from-slate-900 to-slate-800 ${
+          heightScreen ? "h-screen" : ""
+        }`}
+      >
         <Header />
         {children}
-        <div className="p-3 text-center bg-slate-900 text-slate-100">
-          <TextFooter>© Create by Shidqi</TextFooter>
-          <TextFooter bold={false}>
-            Frontend Intern at Sagara Technology
-          </TextFooter>
-        </div>
+        <Footer heightScreen={heightScreen} />
       </div>
     </>
   );

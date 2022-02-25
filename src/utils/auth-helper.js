@@ -27,4 +27,12 @@ function getUserLogin() {
   if (!ISSERVER) return JSON.parse(localStorage.getItem(CONFIG.KEY_USER));
 }
 
-export { authLogin, getUserLogin };
+function checkIsLogin() {
+  return getUserLogin() === null ? false : true;
+}
+
+function authLogout() {
+  localStorage.removeItem(CONFIG.KEY_USER);
+}
+
+export { authLogin, getUserLogin, checkIsLogin, authLogout };

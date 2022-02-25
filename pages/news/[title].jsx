@@ -1,30 +1,19 @@
+import { useRouter } from "next/router";
 import Gap from "../../src/components/atoms/Gap";
+import NewsDetail from "../../src/components/moleculs/NewsDetail";
+import { checkIsLogin } from "../../src/utils/auth-helper";
 
-export default function NewsDetail({ query }) {
-  const {
-    title,
-    author,
-    description,
-    source,
-    url,
-    urlToImage,
-    publisherAt,
-    content,
-  } = query;
+export default function Home({ query }) {
+  const router = useRouter();
+  if (!checkIsLogin()) router.push("/login");
 
   return (
-    <div className="text-slate-50 max-w-4xl mx-auto">
+    <div className="min-h-screen max-w-2xl px-4 mx-auto">
       <Gap height={120} />
-      <h1>{title}</h1>
-      <h1>{publisherAt}</h1>
-      <img src={urlToImage} alt={title} />
-      <h1>{source}</h1>
-      <h1>{author}</h1>
-      <h1>{description}</h1>
-      <h1>{content}</h1>
-      <h1>{url}</h1>
+      <NewsDetail>{query}</NewsDetail>
+      <Gap height={80} />
     </div>
   );
 }
 
-NewsDetail.getInitialProps = async ({ query }) => ({ query });
+Home.getInitialProps = async ({ query }) => ({ query });

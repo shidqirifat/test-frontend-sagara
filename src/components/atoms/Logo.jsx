@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
-
-export default function Logo({ src }) {
+export default function Logo({ srcSmall, srcWidth }) {
   return (
     <div className="w-60 h-10 relative">
-      <Image src={src} layout="fill" alt="Logo Company" priority />
+      <picture>
+        <source media="(min-width: 520px)" srcSet={srcWidth} />
+        <img src={srcSmall} alt="Logo Company" className="h-full w-auto" />
+      </picture>
     </div>
   );
 }

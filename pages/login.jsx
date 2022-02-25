@@ -6,7 +6,6 @@ export default function Home() {
     <>
       <Gap height={160} />
       <CardLogIn />
-      <Gap height={300} />
     </>
   );
 }
