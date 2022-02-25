@@ -1,34 +1,31 @@
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import Gap from "../src/components/atoms/Gap";
 import { getUserLogin } from "../src/utils/auth-helper";
 import { DATA } from "../src/utils/DATA";
+import Hero from "../src/components/moleculs/Hero";
+import HomeNews from "../src/layouts/HomeNews";
 
-export default function Home() {
-  const [user, setUser] = useState({});
-  const [news, setNews] = useState([]);
-  const userLogin = getUserLogin();
+export default function Home({ data }) {
+  const [user, setUser] = useState();
 
   useEffect(() => {
-    setUser(userLogin || null);
-
-    const linkAPI = DATA.ENDPOINT + DATA.API_KEY;
-    fetch(linkAPI)
-      .then((response) => response.json())
-      .then((data) => setNews(data.sources));
+    setUser(getUserLogin() || null);
   }, []);
-
-  const newsElement = news.map((eachNews) => (
-    <div key={eachNews.id}>
-      <h2>{eachNews.name}</h2>
-      <h6>{eachNews.description}</h6>
-    </div>
-  ));
 
   return (
     <div>
       <Gap height={200} />
-      <h1>Hello {user?.firstName + " " + user?.lastName} </h1>
-      <div>{newsElement}</div>
+      <Hero user={user} />
+      <HomeNews>{data.articles}</HomeNews>
+      <Gap height={100} />
     </div>
   );
 }
+
+Home.getInitialProps = async () => {
+  const linkAPI = DATA.ENDPOINT + DATA.API_KEY;
+  const res = await fetch(linkAPI);
+  const data = await res.json();
+  return { data };
+};

@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .news-desc,
+  .news-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  .news-desc {
+    -webkit-line-clamp: 3;
+  }
+  .news-title {
+    -webkit-line-clamp: 1;
+  }
+}

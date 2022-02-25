@@ -12,7 +12,7 @@ export default function Header() {
   }, [path, router]);
 
   return (
-    <header className="bg-slate-900 border-b-4 border-black shadow-lg fixed w-full">
+    <header className="bg-slate-900 border-b-4 border-black shadow-lg w-full fixed z-10">
       <div className="py-4 px-8 max-w-5xl mx-auto flex justify-between items-center">
         <Logo src="/logo-full.png" />
         <LinkAnchor href={`/${path === "/login" ? "" : "login"}`}>
