@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { checkIsLogin, authLogin } from "../../utils/auth-helper";
 import { TitleCard } from "../atoms/Text";
 import Gap from "../atoms/Gap";
+import { motion } from "framer-motion";
+import CONFIG from "../../utils/CONFIG";
 
 export default function CardSignUp() {
   const router = useRouter();
@@ -48,16 +50,23 @@ export default function CardSignUp() {
   }
 
   return (
-    <form
-      method="post"
-      onSubmit={handleSubmit}
-      className="w-max mx-auto p-8 bg-slate-700 rounded-lg shadow-md flex flex-col gap-4"
-    >
-      <TitleCard>Login</TitleCard>
-      <InputEmail value={dataForm.email} handleChange={handleChange} />
-      <InputPassword value={dataForm.password} handleChange={handleChange} />
-      <Gap height={10} />
-      <Button type="submit">Login Account</Button>
-    </form>
+    <div className="max-w-sm mx-auto">
+      <motion.form
+        initial="hidden"
+        animate="enter"
+        exit="exit"
+        transition={{ duration: 0.6 }}
+        variants={CONFIG.ANIMATION}
+        method="post"
+        onSubmit={handleSubmit}
+        className="mx-4 p-8 bg-slate-700 rounded-lg shadow-md flex flex-col gap-4"
+      >
+        <TitleCard>Login</TitleCard>
+        <InputEmail value={dataForm.email} handleChange={handleChange} />
+        <InputPassword value={dataForm.password} handleChange={handleChange} />
+        <Gap height={10} />
+        <Button type="submit">Login Account</Button>
+      </motion.form>
+    </div>
   );
 }

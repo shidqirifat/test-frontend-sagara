@@ -1,7 +1,7 @@
 import Label from "../atoms/Label";
 import InputOption from "../atoms/InputOption";
 
-export default function InputProvince({ value, handleChange }) {
+export default function InputProvince({ value, valueOption, handleChange }) {
   return (
     <div className="flex flex-col gap-1">
       <Label htmlFor="province">Choose City</Label>
@@ -9,13 +9,7 @@ export default function InputProvince({ value, handleChange }) {
         value={value}
         handleChange={handleChange}
         name="city"
-        values={[
-          "Jakarta Pusat",
-          "Jakarta Selatan",
-          "Jakarta Barat",
-          "Bandung",
-          "Depok",
-        ]}
+        values={valueOption}
         choose="City"
       />
     </div>

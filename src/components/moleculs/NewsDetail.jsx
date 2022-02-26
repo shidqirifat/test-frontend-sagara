@@ -6,29 +6,29 @@ import {
   DescriptionDetail,
   LinkSourceDetail,
 } from "../atoms/Text";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import CONFIG from "../../utils/CONFIG";
 
 export default function NewsDetail({ children }) {
   const { title, author, description, url, urlToImage, publisherAt, content } =
     children;
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 100 }}
-        transition={{ duration: 1 }}
-      >
-        <TitleDetail>{title}</TitleDetail>
-        <PublisherDetail>{publisherAt}</PublisherDetail>
-        <ImageNewsDetail src={urlToImage} alt={title} />
-        <AuthorDetail>{author}</AuthorDetail>
-        <DescriptionDetail>
-          {description} {content}
-        </DescriptionDetail>
-        <LinkSourceDetail link={url}>{author}</LinkSourceDetail>
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      transition={{ duration: 0.6 }}
+      variants={CONFIG.ANIMATION}
+    >
+      <TitleDetail>{title}</TitleDetail>
+      <PublisherDetail>{publisherAt}</PublisherDetail>
+      <ImageNewsDetail src={urlToImage} alt={title} />
+      <AuthorDetail>{author}</AuthorDetail>
+      <DescriptionDetail>
+        {description} {content}
+      </DescriptionDetail>
+      <LinkSourceDetail link={url}>{author}</LinkSourceDetail>
+    </motion.div>
   );
 }

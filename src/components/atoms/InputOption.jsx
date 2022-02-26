@@ -2,7 +2,7 @@ export default function InputOption({
   value,
   handleChange,
   name,
-  values,
+  values = [],
   choose,
   required = true,
 }) {

@@ -14,7 +14,7 @@ export default function InputField({
       placeholder={placeholder}
       value={value}
       onChange={handleChange}
-      className="w-72 py-2 px-3 shadow appearance-none rounded text-gray-700 leading-tight border-[3px] outline-4 outline-offset-4 focus:outline-sky-600 focus:shadow-outline  invalid:outline-none invalid:border-red-500 text-lg"
+      className="w-full py-2 px-3 shadow appearance-none rounded text-gray-700 leading-tight border-[3px] outline-4 outline-offset-4 focus:outline-sky-600 focus:shadow-outline  invalid:outline-none invalid:border-red-500 text-lg"
       required={required}
     />
   );

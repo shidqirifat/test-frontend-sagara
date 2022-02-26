@@ -12,9 +12,12 @@ import { saveLocalStorage } from "../../utils/storage-helper";
 import { checkIsLogin } from "../../utils/auth-helper";
 import { TitleCard } from "../atoms/Text";
 import Gap from "../atoms/Gap";
+import { motion } from "framer-motion";
+import CONFIG from "../../utils/CONFIG";
 
 export default function CardSignUp() {
   const router = useRouter();
+  const [cityOption, setCityOption] = useState();
   const [dataForm, setDataForm] = useState({
     firstName: "",
     lastName: "",
@@ -27,7 +30,12 @@ export default function CardSignUp() {
 
   useEffect(() => {
     if (checkIsLogin()) router.back();
-  }, []);
+
+    if (dataForm.province === "Jawa Barat") setCityOption(["Bandung", "Depok"]);
+    else if (dataForm.province === "DKI Jakarta")
+      setCityOption(["Jakarta Pusat", "Jakarta Selatan", "Jakarta Barat"]);
+    else setCityOption([]);
+  }, [dataForm]);
 
   function handleChange(e) {
     const { value, name } = e.target;
@@ -59,39 +67,57 @@ export default function CardSignUp() {
   }
 
   return (
-    <form
-      method="post"
-      onSubmit={handleSubmit}
-      className="w-max mx-auto p-8 bg-slate-700 rounded-lg shadow-md flex flex-col gap-4"
-    >
-      <TitleCard>Register</TitleCard>
-      <InputFirstName value={dataForm.firstName} handleChange={handleChange} />
-      <InputLastName value={dataForm.lastName} handleChange={handleChange} />
-      <InputEmail value={dataForm.email} handleChange={handleChange} />
-      <InputPassword value={dataForm.password} handleChange={handleChange} />
-      <div className="flex gap-4 justify-between">
-        <InputGender
-          value={dataForm.gender}
+    <div className="max-w-md mx-auto">
+      <motion.form
+        initial="hidden"
+        animate="enter"
+        exit="exit"
+        transition={{ duration: 0.6 }}
+        variants={CONFIG.ANIMATION}
+        method="post"
+        onSubmit={handleSubmit}
+        className="mx-4 p-8 bg-slate-700 rounded-lg shadow-md flex flex-col gap-4"
+      >
+        <TitleCard>Register</TitleCard>
+        <InputFirstName
+          value={dataForm.firstName}
           handleChange={handleChange}
-          id="male"
-          name="gender"
-          required={true}
-        >
-          Laki-laki
-        </InputGender>
-        <InputGender
-          value={dataForm.gender}
+        />
+        <InputLastName value={dataForm.lastName} handleChange={handleChange} />
+        <InputEmail value={dataForm.email} handleChange={handleChange} />
+        <InputPassword value={dataForm.password} handleChange={handleChange} />
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 justify-between">
+          <InputGender
+            value={dataForm.gender}
+            handleChange={handleChange}
+            id="male"
+            name="gender"
+            required={true}
+          >
+            Laki-laki
+          </InputGender>
+          <InputGender
+            value={dataForm.gender}
+            handleChange={handleChange}
+            id="female"
+            name="gender"
+          >
+            Perempuan
+          </InputGender>
+        </div>
+        <InputProvince
+          value={dataForm.province}
+          valueOption={["DKI Jakarta", "Jawa Barat"]}
           handleChange={handleChange}
-          id="female"
-          name="gender"
-        >
-          Perempuan
-        </InputGender>
-      </div>
-      <InputProvince value={dataForm.province} handleChange={handleChange} />
-      <InputCity value={dataForm.city} handleChange={handleChange} />
-      <Gap height={10} />
-      <Button type="submit">Register Account</Button>
-    </form>
+        />
+        <InputCity
+          value={dataForm.city}
+          valueOption={cityOption}
+          handleChange={handleChange}
+        />
+        <Gap height={10} />
+        <Button type="submit">Register Account</Button>
+      </motion.form>
+    </div>
   );
 }

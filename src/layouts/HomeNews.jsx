@@ -1,5 +1,6 @@
 import CardNews from "../components/organisms/CardNews";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import CONFIG from "../utils/CONFIG";
 
 export default function HomeNews({ children }) {
   const newsElement = children.map((news, index) => (
@@ -7,17 +8,16 @@ export default function HomeNews({ children }) {
   ));
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 1, y: 100 }}
-        transition={{ duration: 1 }}
-        className="text-slate-100 grid gap-6 px-8 max-w-5xl mx-auto"
-        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
-      >
-        {newsElement}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      transition={{ duration: 0.6 }}
+      variants={CONFIG.ANIMATION}
+      className="text-slate-100 grid gap-6 px-8 max-w-5xl mx-auto"
+      style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
+    >
+      {newsElement}
+    </motion.div>
   );
 }
