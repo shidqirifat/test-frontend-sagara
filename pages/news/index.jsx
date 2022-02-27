@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
-import Gap from "../src/components/atoms/Gap";
-import { getUserLogin } from "../src/utils/auth-helper";
-import CONFIG from "../src/utils/CONFIG";
-import Hero from "../src/components/moleculs/Hero";
-import HomeNews from "../src/layouts/HomeNews";
-import { checkIsLogin } from "../src/utils/auth-helper";
-import { useRouter } from "next/router";
+import Gap from "../../src/components/atoms/Gap";
+import CONFIG from "../../src/utils/CONFIG";
+import Hero from "../../src/components/moleculs/Hero";
+import HomeNews from "../../src/layouts/HomeNews";
+import { getUserLogin } from "../../src/utils/auth-helper";
 
 export default function Home({ data }) {
   const [user, setUser] = useState();
-  const router = useRouter();
 
   useEffect(() => {
-    if (!checkIsLogin()) router.back();
-
     setUser(getUserLogin() || null);
   }, []);
 

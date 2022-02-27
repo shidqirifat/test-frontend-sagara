@@ -9,7 +9,6 @@ import Button from "../atoms/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { saveLocalStorage } from "../../utils/storage-helper";
-import { checkIsLogin } from "../../utils/auth-helper";
 import { TitleCard } from "../atoms/Text";
 import Gap from "../atoms/Gap";
 import { motion } from "framer-motion";
@@ -29,8 +28,6 @@ export default function CardSignUp() {
   });
 
   useEffect(() => {
-    if (checkIsLogin()) router.back();
-
     if (dataForm.province === "Jawa Barat") setCityOption(["Bandung", "Depok"]);
     else if (dataForm.province === "DKI Jakarta")
       setCityOption(["Jakarta Pusat", "Jakarta Selatan", "Jakarta Barat"]);

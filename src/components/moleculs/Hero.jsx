@@ -12,9 +12,7 @@ export default function Hero({ user }) {
       transition={{ duration: 0.6 }}
       variants={CONFIG.ANIMATION}
     >
-      <TextHero greetings={true}>
-        Hi, {user?.firstName} {user?.lastName}!
-      </TextHero>
+      <TextHero greetings={true}>Hi, {user}!</TextHero>
       <TextHero>Berikut berita yang sedang populer di minggu ini.</TextHero>
     </motion.div>
   );

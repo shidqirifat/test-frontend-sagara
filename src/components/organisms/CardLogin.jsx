@@ -1,9 +1,9 @@
 import InputEmail from "../moleculs/InputEmail";
 import InputPassword from "../moleculs/InputPassword";
 import Button from "../atoms/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { checkIsLogin, authLogin } from "../../utils/auth-helper";
+import { authLogin } from "../../utils/auth-helper";
 import { TitleCard } from "../atoms/Text";
 import Gap from "../atoms/Gap";
 import { motion } from "framer-motion";
@@ -11,10 +11,6 @@ import CONFIG from "../../utils/CONFIG";
 
 export default function CardSignUp() {
   const router = useRouter();
-
-  useEffect(() => {
-    if (checkIsLogin()) router.back();
-  }, []);
 
   const [dataForm, setDataForm] = useState({
     email: "",
@@ -44,7 +40,7 @@ export default function CardSignUp() {
       if (!success) return alert("Email and password did not match");
 
       router.push({
-        pathname: "/",
+        pathname: "/news",
       });
     }
   }

@@ -1,5 +1,4 @@
 import { isEmailExist, getLocalStorage } from "./storage-helper";
-import CONFIG from "./CONFIG";
 
 function authLogin(account) {
   if (!isEmailExist(account)) return false;
@@ -10,7 +9,9 @@ function authLogin(account) {
 function isMatch(account) {
   const users = getLocalStorage();
 
-  const userFound = users.filter(user => user.email === account.email && user.password === account.password);
+  const userFound = users.filter(
+    (user) => user.email === account.email && user.password === account.password
+  );
   if (userFound.length === 0) return false;
 
   saveAuth(userFound[0]);
@@ -18,21 +19,28 @@ function isMatch(account) {
 }
 
 function saveAuth(user) {
-  localStorage.setItem(CONFIG.KEY_USER, JSON.stringify(user))
+  document.cookie = `username=${user.firstName} ${user.lastName}`;
 }
 
 function getUserLogin() {
   const ISSERVER = typeof window === "undefined";
 
-  if (!ISSERVER) return JSON.parse(localStorage.getItem(CONFIG.KEY_USER));
+  if (!ISSERVER) return getCook("username");
 }
 
 function checkIsLogin() {
-  return getUserLogin() === null ? false : true;
+  return getUserLogin() === "" ? false : true;
 }
 
 function authLogout() {
-  localStorage.removeItem(CONFIG.KEY_USER);
+  document.cookie = "username=";
+}
+
+function getCook(cookiename) {
+  var cookiestring = RegExp(cookiename + "=[^;]+").exec(document.cookie);
+  return decodeURIComponent(
+    !!cookiestring ? cookiestring.toString().replace(/^[^=]+./, "") : ""
+  );
 }
 
 export { authLogin, getUserLogin, checkIsLogin, authLogout };

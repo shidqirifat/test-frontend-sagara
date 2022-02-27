@@ -1,6 +1,6 @@
 import Layout from "../src/layouts/Main";
-import '../styles/globals.css';
-import { motion, AnimatePresence } from "framer-motion"
+import "../styles/globals.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function MyApp({ Component, pageProps, router }) {
   return (
@@ -11,5 +11,5 @@ export default function MyApp({ Component, pageProps, router }) {
         </Layout>
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }
